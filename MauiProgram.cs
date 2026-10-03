@@ -18,7 +18,12 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		builder.Services.AddSingleton<IUserService, UserService>();
+		builder.Services.AddHttpClient<IUserService, ApiUserService>(client =>
+		{
+			client.BaseAddress = new Uri(ApiConfig.BaseUrl);
+			client.Timeout = TimeSpan.FromSeconds(15);
+		});
+		
 		builder.Services.AddTransient<CreateUserViewModel>();
 		builder.Services.AddTransient<CreateUserPage>();
 

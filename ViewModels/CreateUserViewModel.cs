@@ -35,33 +35,67 @@ public partial class CreateUserViewModel : ObservableObject
     [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
     private string password = "";
 
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
+    private bool isBusy;
+
     [ObservableProperty] private string message = "";
+
+    [ObservableProperty] private bool isError;
 
     public ObservableCollection<User> Users { get; } = new();
 
     private bool CanSave() =>
+        !IsBusy &&
         !string.IsNullOrWhiteSpace(Username) &&
+        !string.IsNullOrWhiteSpace(Password) &&
         Email.Contains('@');
 
     [RelayCommand(CanExecute = nameof(CanSave))]
     private async Task SaveAsync()
     {
-        var user = await _service.CreateAsync(new User
-        {
-            FirstName = firstName.Trim(),
-            LastName = lastName.Trim(),
-            Username = username.Trim(),
-            Email = email.Trim(),
-            Password = password.Trim(),
-        });
-        
-        Users.Add(user);
-        Message = $"User {user.FirstName} {user.LastName} created successfully!";
+        IsBusy = true;
+        Message = "";
+        IsError = false;
 
-        FirstName = "";
-        LastName = "";
-        Username = "";
-        Email = "";
-        Password = "";
+        try
+        {
+            var user = await _service.CreateAsync(new User
+            {
+                FirstName = FirstName.Trim(),
+                LastName = LastName.Trim(),
+                Username = Username.Trim(),
+                Email = Email.Trim(),
+                Password = Password.Trim()
+            });
+
+            Users.Add(user);
+            Message = $"User {user.FirstName} {user.LastName} created (id {user.Id})!";
+
+            FirstName = "";
+            LastName = "";
+            Username = "";
+            Email = "";
+            Password = "";
+        }
+        catch (HttpRequestException ex)
+        {
+            IsError = true;
+            Message = $"Server error: {ex.Message}";
+        }
+        catch (TaskCanceledException)
+        {
+            IsError = true;
+            Message = $"The request timed out. Check your connection.";
+        }
+        catch (Exception ex)
+        {
+            IsError = true;
+            Message = $"Unexpected error: {ex.Message}";
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
 }

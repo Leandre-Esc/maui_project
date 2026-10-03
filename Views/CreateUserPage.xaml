@@ -96,11 +96,34 @@
                             TextColor="White"
                             BackgroundColor="#635BFF" />
 
+                    <HorizontalStackLayout Spacing="8"
+                                           HorizontalOptions="Center"
+                                           Margin="0,14,0,0">
+                        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                           IsVisible="{Binding IsBusy}"
+                                           Color="#635BFF"
+                                           WidthRequest="20"
+                                           HeightRequest="20" />
+                        <Label Text="Création en cours..."
+                               IsVisible="{Binding IsBusy}"
+                               TextColor="#635BFF"
+                               FontSize="13"
+                               VerticalTextAlignment="Center" />
+                    </HorizontalStackLayout>
+
                     <Label Text="{Binding Message}"
-                           TextColor="#16803C"
                            FontSize="13"
                            HorizontalTextAlignment="Center"
-                           Margin="0,14,0,0" />
+                           Margin="0,10,0,0">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsError}" Value="True">
+                                <Setter Property="TextColor" Value="#B42318"/>
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsError}" Value="False">
+                                <Setter Property="TextColor" Value="#16803C"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
                 </VerticalStackLayout>
             </Border>
 
