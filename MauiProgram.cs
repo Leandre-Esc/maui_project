@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using maui_project.Services;
+using maui_project.ViewModels;
+using maui_project.Views;
 
 namespace maui_project;
 
@@ -14,6 +17,10 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
+
+		builder.Services.AddSingleton<IUserService, UserService>();
+		builder.Services.AddTransient<CreateUserViewModel>();
+		builder.Services.AddTransient<CreateUserPage>();
 
 #if DEBUG
 		builder.Logging.AddDebug();

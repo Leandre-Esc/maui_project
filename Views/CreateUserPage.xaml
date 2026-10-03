@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:maui_project.ViewModels"
+             xmlns:models="clr-namespace:maui_project.Models"
+             x:Class="maui_project.Views.CreateUserPage"
+             x:DataType="vm:CreateUserViewModel"
+             Title="Create user">
+    
+    <VerticalStackLayout Padding="20" Spacing="12">
+        
+        <Entry Placeholder="First name" Text="{Binding FirstName}"/>
+        <Entry Placeholder="Last name" Text="{Binding LastName}"/>
+        <Entry Placeholder="Username" Text="{Binding Username}"/>
+        <Entry Placeholder="Email" Text="{Binding Email}"/>
+        <Entry Placeholder="Password" Text="{Binding Password}"/>
+        
+        <Button Text="Create user" Command="{Binding SaveCommand}"/>
+        
+        <Label Text="{Binding Message}" TextColor="Green"/>
+        
+        <Label Text="User created" FontAttributes="Bold"/>
+        <CollectionView ItemsSource="{Binding Users}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:User">
+                    <Label Text="{Binding Email , StringFormat='{0}'}" Padding="0,4"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+
+</ContentPage>
