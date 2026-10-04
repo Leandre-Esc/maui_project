@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:maui_project.ViewModels.Users"
+             xmlns:models="clr-namespace:maui_project.Models"
+             xmlns:shared='clr-namespace:maui_project.Views.Shared'
+             x:Class="maui_project.Views.Users.UsersPage"
+             x:DataType="vm:UsersViewModel"
+             Title="Users"
+             Shell.NavBarIsVisible="False">
+    
+    <Grid RowDefinitions="Auto,*">
+        <shared:AppHeaderView Grid.Row="0"/>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="15">
+                <Button Text="Load users" Command="{Binding LoadUsersCommand}"/>
+        
+                <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+        
+                <Label Text="{Binding Message}" TextColor="Red"/>
+        
+                <CollectionView ItemsSource="{Binding Users}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:User">
+                            <VerticalStackLayout Padding="18">
+                                <Label Text="{Binding FirstName}" FontAttributes="Bold"/>
+                                <Label Text="{Binding LastName}"/>
+                                <Label Text="{Binding Username}"/>
+                                <Label Text="{Binding Email}"/>
+                                <BoxView HeightRequest="1" BackgroundColor="LightGray"/>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

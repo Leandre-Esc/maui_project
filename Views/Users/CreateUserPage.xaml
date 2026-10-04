@@ -4,11 +4,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:maui_project.ViewModels.Users"
              xmlns:models="clr-namespace:maui_project.Models"
+             xmlns:shared="clr-namespace:maui_project.Views.Shared"
              x:Class="maui_project.Views.Users.CreateUserPage"
              x:DataType="vm:CreateUserViewModel"
              BackgroundColor="#F6F7FB"
              Shell.NavBarIsVisible="False">
-
+    
     <ContentPage.Resources>
         <Style x:Key="FieldLabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="13" />
@@ -26,138 +27,110 @@
         </Style>
     </ContentPage.Resources>
 
-    <ScrollView>
-        <VerticalStackLayout Padding="22,34,22,28" Spacing="0">
-            <Label Text="Créer un compte"
-                   FontSize="30"
-                   FontAttributes="Bold"
-                   TextColor="#172033" />
+    <Grid RowDefinitions="Auto,*">
+        <shared:AppHeaderView Grid.Row="0" />
 
-            <Label Text="Renseignez vos informations pour commencer."
-                   FontSize="15"
-                   TextColor="#6B7280"
-                   Margin="0,8,0,24" />
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="22,34,22,28" Spacing="0">
+                <Label Text="Créer un compte"
+                       FontSize="30"
+                       FontAttributes="Bold"
+                       TextColor="#172033" />
 
-            <Border BackgroundColor="White"
-                    Stroke="#E5E7EB"
-                    StrokeThickness="1"
-                    Padding="18,20"
-                    StrokeShape="RoundRectangle 20">
-                <Border.Shadow>
-                    <Shadow Brush="#22000000" Offset="0,4" Radius="16" Opacity="0.18" />
-                </Border.Shadow>
+                <Label Text="Renseignez vos informations pour commencer."
+                       FontSize="15"
+                       TextColor="#6B7280"
+                       Margin="0,8,0,24" />
 
-                <VerticalStackLayout Spacing="0">
-                    <Label Text="Informations personnelles"
-                           FontSize="18"
-                           FontAttributes="Bold"
-                           TextColor="#172033"
-                           Margin="0,0,0,18" />
+                <Border BackgroundColor="White"
+                        Stroke="#E5E7EB"
+                        StrokeThickness="1"
+                        Padding="18,20"
+                        StrokeShape="RoundRectangle 20">
+                    <Border.Shadow>
+                        <Shadow Brush="#22000000" Offset="0,4" Radius="16" Opacity="0.18" />
+                    </Border.Shadow>
 
-                    <Label Text="Prénom" Style="{StaticResource FieldLabelStyle}" />
-                    <Border Stroke="#E5E7EB" StrokeThickness="1" BackgroundColor="#FAFAFC" Padding="12,0" Margin="0,0,0,14" StrokeShape="RoundRectangle 12">
-                        <Entry Text="{Binding FirstName}" Placeholder="Votre prénom" Style="{StaticResource FieldEntryStyle}" />
-                    </Border>
+                    <VerticalStackLayout Spacing="0">
+                        <Label Text="Informations personnelles"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="#172033"
+                               Margin="0,0,0,18" />
 
-                    <Label Text="Nom" Style="{StaticResource FieldLabelStyle}" />
-                    <Border Stroke="#E5E7EB" StrokeThickness="1" BackgroundColor="#FAFAFC" Padding="12,0" Margin="0,0,0,14" StrokeShape="RoundRectangle 12">
-                        <Entry Text="{Binding LastName}" Placeholder="Votre nom" Style="{StaticResource FieldEntryStyle}" />
-                    </Border>
+                        <Label Text="Prénom" Style="{StaticResource FieldLabelStyle}" />
+                        <Border Stroke="#E5E7EB" StrokeThickness="1" BackgroundColor="#FAFAFC" Padding="12,0" Margin="0,0,0,14" StrokeShape="RoundRectangle 12">
+                            <Entry Text="{Binding FirstName}" Placeholder="Votre prénom" Style="{StaticResource FieldEntryStyle}" />
+                        </Border>
 
-                    <Label Text="Nom d'utilisateur" Style="{StaticResource FieldLabelStyle}" />
-                    <Border Stroke="#E5E7EB" StrokeThickness="1" BackgroundColor="#FAFAFC" Padding="12,0" Margin="0,0,0,14" StrokeShape="RoundRectangle 12">
-                        <Entry Text="{Binding Username}" Placeholder="Votre identifiant" Keyboard="Text" Style="{StaticResource FieldEntryStyle}" />
-                    </Border>
+                        <Label Text="Nom" Style="{StaticResource FieldLabelStyle}" />
+                        <Border Stroke="#E5E7EB" StrokeThickness="1" BackgroundColor="#FAFAFC" Padding="12,0" Margin="0,0,0,14" StrokeShape="RoundRectangle 12">
+                            <Entry Text="{Binding LastName}" Placeholder="Votre nom" Style="{StaticResource FieldEntryStyle}" />
+                        </Border>
 
-                    <Label Text="Adresse email" Style="{StaticResource FieldLabelStyle}" />
-                    <Border Stroke="#E5E7EB" StrokeThickness="1" BackgroundColor="#FAFAFC" Padding="12,0" Margin="0,0,0,14" StrokeShape="RoundRectangle 12">
-                        <Entry Text="{Binding Email}" Placeholder="vous@exemple.com" Keyboard="Email" TextTransform="Lowercase" Style="{StaticResource FieldEntryStyle}" />
-                    </Border>
+                        <Label Text="Nom d'utilisateur" Style="{StaticResource FieldLabelStyle}" />
+                        <Border Stroke="#E5E7EB" StrokeThickness="1" BackgroundColor="#FAFAFC" Padding="12,0" Margin="0,0,0,14" StrokeShape="RoundRectangle 12">
+                            <Entry Text="{Binding Username}" Placeholder="Votre identifiant" Keyboard="Text" Style="{StaticResource FieldEntryStyle}" />
+                        </Border>
 
-                    <Label Text="Mot de passe" Style="{StaticResource FieldLabelStyle}" />
-                    <Border Stroke="#E5E7EB" StrokeThickness="1" BackgroundColor="#FAFAFC" Padding="12,0" Margin="0,0,0,22" StrokeShape="RoundRectangle 12">
-                        <Entry Text="{Binding Password}" Placeholder="Votre mot de passe" IsPassword="True" Style="{StaticResource FieldEntryStyle}">
-                            <Entry.Keyboard>
-                                <Keyboard x:FactoryMethod="Create">
-                                    <x:Arguments>
-                                        <KeyboardFlags>CapitalizeNone</KeyboardFlags>
-                                    </x:Arguments>
-                                </Keyboard>
-                            </Entry.Keyboard>
-                        </Entry>
-                    </Border>
+                        <Label Text="Adresse email" Style="{StaticResource FieldLabelStyle}" />
+                        <Border Stroke="#E5E7EB" StrokeThickness="1" BackgroundColor="#FAFAFC" Padding="12,0" Margin="0,0,0,14" StrokeShape="RoundRectangle 12">
+                            <Entry Text="{Binding Email}" Placeholder="vous@exemple.com" Keyboard="Email" TextTransform="Lowercase" Style="{StaticResource FieldEntryStyle}" />
+                        </Border>
 
-                    <Button Text="Créer mon compte"
-                            Command="{Binding SaveCommand}"
-                            HeightRequest="52"
-                            CornerRadius="14"
-                            FontSize="16"
-                            FontAttributes="Bold"
-                            TextColor="White"
-                            BackgroundColor="#635BFF" />
+                        <Label Text="Mot de passe" Style="{StaticResource FieldLabelStyle}" />
+                        <Border Stroke="#E5E7EB" StrokeThickness="1" BackgroundColor="#FAFAFC" Padding="12,0" Margin="0,0,0,22" StrokeShape="RoundRectangle 12">
+                            <Entry Text="{Binding Password}" Placeholder="Votre mot de passe" IsPassword="True" Style="{StaticResource FieldEntryStyle}">
+                                <Entry.Keyboard>
+                                    <Keyboard x:FactoryMethod="Create">
+                                        <x:Arguments>
+                                            <KeyboardFlags>CapitalizeNone</KeyboardFlags>
+                                        </x:Arguments>
+                                    </Keyboard>
+                                </Entry.Keyboard>
+                            </Entry>
+                        </Border>
 
-                    <HorizontalStackLayout Spacing="8"
-                                           HorizontalOptions="Center"
-                                           Margin="0,14,0,0">
-                        <ActivityIndicator IsRunning="{Binding IsBusy}"
-                                           IsVisible="{Binding IsBusy}"
-                                           Color="#635BFF"
-                                           WidthRequest="20"
-                                           HeightRequest="20" />
-                        <Label Text="Création en cours..."
-                               IsVisible="{Binding IsBusy}"
-                               TextColor="#635BFF"
+                        <Button Text="Créer mon compte"
+                                Command="{Binding SaveCommand}"
+                                HeightRequest="52"
+                                CornerRadius="14"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                BackgroundColor="#635BFF" />
+
+                        <HorizontalStackLayout Spacing="8"
+                                               HorizontalOptions="Center"
+                                               Margin="0,14,0,0">
+                            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                               IsVisible="{Binding IsBusy}"
+                                               Color="#635BFF"
+                                               WidthRequest="20"
+                                               HeightRequest="20" />
+                            <Label Text="Création en cours..."
+                                   IsVisible="{Binding IsBusy}"
+                                   TextColor="#635BFF"
+                                   FontSize="13"
+                                   VerticalTextAlignment="Center" />
+                        </HorizontalStackLayout>
+
+                        <Label Text="{Binding Message}"
                                FontSize="13"
-                               VerticalTextAlignment="Center" />
-                    </HorizontalStackLayout>
-
-                    <Label Text="{Binding Message}"
-                           FontSize="13"
-                           HorizontalTextAlignment="Center"
-                           Margin="0,10,0,0">
-                        <Label.Triggers>
-                            <DataTrigger TargetType="Label" Binding="{Binding IsError}" Value="True">
-                                <Setter Property="TextColor" Value="#B42318"/>
-                            </DataTrigger>
-                            <DataTrigger TargetType="Label" Binding="{Binding IsError}" Value="False">
-                                <Setter Property="TextColor" Value="#16803C"/>
-                            </DataTrigger>
-                        </Label.Triggers>
-                    </Label>
-                </VerticalStackLayout>
-            </Border>
-
-            <Label Text="Utilisateurs créés"
-                   FontSize="20"
-                   FontAttributes="Bold"
-                   TextColor="#172033"
-                   Margin="2,28,0,12" />
-
-            <Border BackgroundColor="White"
-                    Stroke="#E5E7EB"
-                    StrokeThickness="1"
-                    Padding="14,8"
-                    StrokeShape="RoundRectangle 16">
-                <CollectionView ItemsSource="{Binding Users}" HeightRequest="150">
-                    <CollectionView.EmptyView>
-                        <Label Text="Aucun utilisateur pour le moment."
-                               TextColor="#9CA3AF"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center" />
-                    </CollectionView.EmptyView>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:User">
-                            <Grid Padding="4,10" ColumnDefinitions="*,Auto">
-                                <VerticalStackLayout>
-                                    <Label Text="{Binding Email}" FontAttributes="Bold" TextColor="#172033" />
-                                    <Label Text="{Binding Username}" FontSize="12" TextColor="#6B7280" />
-                                </VerticalStackLayout>
-                                <Label Grid.Column="1" Text="✓" FontSize="18" TextColor="#16803C" VerticalOptions="Center" />
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </Border>
-        </VerticalStackLayout>
-    </ScrollView>
+                               HorizontalTextAlignment="Center"
+                               Margin="0,10,0,0">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsError}" Value="True">
+                                    <Setter Property="TextColor" Value="#B42318"/>
+                                </DataTrigger>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsError}" Value="False">
+                                    <Setter Property="TextColor" Value="#16803C"/>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

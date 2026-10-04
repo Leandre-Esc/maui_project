@@ -28,6 +28,9 @@ public static class MauiProgram
 		builder.Services.AddTransient<CreateUserViewModel>();
 		builder.Services.AddTransient<CreateUserPage>();
 
+		builder.Services.AddTransient<UsersViewModel>();
+		builder.Services.AddTransient<UsersPage>();
+
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
