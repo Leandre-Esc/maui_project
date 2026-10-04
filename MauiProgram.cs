@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using maui_project.Services;
-using maui_project.ViewModels;
-using maui_project.Views;
+using maui_project.Services.Api;
+using maui_project.Services.Interfaces;
+using maui_project.ViewModels.Users;
+using maui_project.Views.Users;
 
 namespace maui_project;
 

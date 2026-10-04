@@ -2,9 +2,9 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using maui_project.Models;
-using maui_project.Services;
+using maui_project.Services.Interfaces;
 
-namespace maui_project.ViewModels;
+namespace maui_project.ViewModels.Users;
 
 public partial class CreateUserViewModel : ObservableObject
 {

@@ -1,7 +1,8 @@
 using System.Net.Http.Json;
 using maui_project.Models;
+using maui_project.Services.Interfaces;
 
-namespace maui_project.Services;
+namespace maui_project.Services.Api;
 
 public class ApiUserService : IUserService
 {

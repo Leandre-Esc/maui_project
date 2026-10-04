@@ -1,6 +1,6 @@
 using maui_project.Models;
 
-namespace maui_project.Services;
+namespace maui_project.Services.Interfaces;
 
 public interface IUserService
 {

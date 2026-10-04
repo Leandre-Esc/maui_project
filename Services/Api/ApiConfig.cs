@@ -1,4 +1,4 @@
-namespace maui_project.Services;
+namespace maui_project.Services.Api;
 
 public class ApiConfig
 {
