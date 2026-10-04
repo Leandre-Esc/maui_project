@@ -24,6 +24,11 @@ public static class MauiProgram
 			client.BaseAddress = new Uri(ApiConfig.BaseUrl);
 			client.Timeout = TimeSpan.FromSeconds(15);
 		});
+
+		builder.Services.AddHttpClient<IStagingApiService, StagingApiService>(client =>
+		{
+			client.Timeout = TimeSpan.FromSeconds(10);
+		});
 		
 		builder.Services.AddTransient<CreateUserViewModel>();
 		builder.Services.AddTransient<CreateUserPage>();

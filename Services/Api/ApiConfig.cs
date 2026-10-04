@@ -2,6 +2,8 @@ namespace maui_project.Services.Api;
 
 public class ApiConfig
 {
+    public const string StagingPingUrl = "http://51.11.240.246/api/ping";
+
     private const string LanIp = "192.168.0.30";
     private const int Port = 5265;
 
